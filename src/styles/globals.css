@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+@theme {
+  /* === Colors (DESIGN.md authoritative tokens) === */
+  --color-midnight-ink: #000000;
+  --color-carbon: #222f30;
+  --color-fog: #4d5757;
+  --color-sage-mist: #c9cbbe;
+  --color-cloud-canvas: #e7e8e1;
+  --color-light-gray: #eeeeee;
+  --color-off-white: #f7f7f5;
+  --color-polar-white: #ffffff;
+  --color-bio-green: #cef79e;
+  --color-deep-sea: #445e5f;
+
+  /* === Fonts: Latin first, Anuphan picks up Thai per-glyph === */
+  --font-aspekta: "Aspekta", "Inter", "Anuphan", "Noto Sans Thai",
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  --font-roboto-mono: "Roboto Mono", "IBM Plex Sans Thai Looped",
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* === Type scale === */
+  --text-caption: 16px;
+  --leading-caption: 1.2;
+  --text-body-sm: 18px;
+  --leading-body-sm: 1.2;
+  --text-body: 22px;
+  --leading-body: 1.2;
+  --text-body-lg: 24px;
+  --leading-body-lg: 1.2;
+  --text-heading-sm: 42px;
+  --leading-heading-sm: 1.2;
+  --text-heading: 58px;
+  --leading-heading: 1.2;
+  --text-heading-lg: 75px;
+  --leading-heading-lg: 1.2;
+  --text-display-sm: 111px;
+  --leading-display-sm: 1.2;
+  --text-display: 158px;
+  --leading-display: 1.2;
+
+  /* === Spacing === */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-40: 40px;
+  --spacing-44: 44px;
+  --spacing-48: 48px;
+  --spacing-52: 52px;
+  --spacing-60: 60px;
+  --spacing-88: 88px;
+  --spacing-100: 100px;
+  --spacing-160: 160px;
+
+  /* === Radius === */
+  --radius-buttons: 8px;
+  --radius-tags: 20px;
+  --radius-cards: 40px;
+}
+
+:root {
+  color-scheme: dark;
+  background: var(--color-midnight-ink);
+  color: var(--color-polar-white);
+  font-family: var(--font-aspekta);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: var(--color-midnight-ink);
+}
+
+/* Thai shouldn't get the Latin negative tracking — neutralize it. */
+:lang(th),
+[lang="th"] {
+  letter-spacing: 0;
+  font-feature-settings: "locl";
+}
+
+/* === Surface utilities === */
+.surface-midnight { background: var(--color-midnight-ink); color: var(--color-polar-white); }
+.surface-carbon   { background: var(--color-carbon); color: var(--color-polar-white); }
+.surface-cloud    { background: var(--color-cloud-canvas); color: var(--color-carbon); }
+.surface-light    { background: var(--color-light-gray); color: var(--color-carbon); }
+.surface-off      { background: var(--color-off-white); color: var(--color-carbon); }
+
+/* === Bento card per DESIGN.md ===
+   - 40px radius
+   - 1px Sage Mist border (Polar White on light surfaces, Sage Mist on dark)
+   - NO drop shadow — surface differentiation only.
+*/
+.bento-card {
+  border-radius: var(--radius-cards);
+  border: 1px solid var(--color-sage-mist);
+  padding: var(--spacing-40);
+  background: var(--color-cloud-canvas);
+  color: var(--color-carbon);
+}
+.bento-card-dark {
+  border-radius: var(--radius-cards);
+  border: 1px solid var(--color-fog);
+  padding: var(--spacing-40);
+  background: var(--color-carbon);
+  color: var(--color-polar-white);
+}
+
+/* Mono data tag — Roboto Mono on Bio-Green chip (per DESIGN.md component spec) */
+.mono-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  font-family: var(--font-roboto-mono);
+  font-size: 13px;
+  letter-spacing: -0.008em;
+  background: var(--color-bio-green);
+  color: var(--color-carbon);
+  padding: 4px 10px;
+  border-radius: var(--radius-buttons);
+}
+.mono-tag-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  font-family: var(--font-roboto-mono);
+  font-size: 13px;
+  letter-spacing: -0.008em;
+  border: 1px solid var(--color-sage-mist);
+  color: var(--color-sage-mist);
+  padding: 4px 10px;
+  border-radius: var(--radius-buttons);
+  background: transparent;
+}
+
+/* Buttons (per DESIGN.md component spec) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  border-radius: var(--radius-buttons);
+  padding: 12px 20px;
+  font-family: var(--font-aspekta);
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 200ms, color 200ms, border-color 200ms;
+  border: 1px solid transparent;
+  min-height: 44px;
+}
+.btn-primary {
+  background: var(--color-carbon);
+  color: var(--color-polar-white);
+}
+.btn-primary:hover { background: var(--color-fog); }
+.btn-ghost {
+  background: transparent;
+  color: var(--color-polar-white);
+  border-color: var(--color-polar-white);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.08); }
+.btn-ghost-dark {
+  background: transparent;
+  color: var(--color-carbon);
+  border-color: var(--color-carbon);
+}
+.btn-ghost-dark:hover { background: rgba(0,0,0,0.05); }
+.btn-accent {
+  background: var(--color-bio-green);
+  color: var(--color-carbon);
+  border-color: var(--color-bio-green);
+}
+.btn-accent:hover { background: #d8f9ad; }
+
+/* Inputs */
+.input {
+  display: block;
+  width: 100%;
+  padding: 14px 17px;
+  font-family: var(--font-aspekta);
+  font-size: 16px;
+  border-radius: var(--radius-buttons);
+  border: 1px solid var(--color-sage-mist);
+  background: var(--color-off-white);
+  color: var(--color-carbon);
+  transition: border-color 200ms;
+}
+.input:focus-visible {
+  outline: 2px solid var(--color-bio-green);
+  outline-offset: 2px;
+  border-color: var(--color-carbon);
+}
+.input-dark {
+  background: transparent;
+  color: var(--color-polar-white);
+  border-color: var(--color-polar-white);
+}
+.input-dark:focus-visible {
+  outline: 2px solid var(--color-bio-green);
+  border-color: var(--color-bio-green);
+}
+
+/* Visible focus */
+*:focus-visible {
+  outline: 2px solid var(--color-bio-green);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

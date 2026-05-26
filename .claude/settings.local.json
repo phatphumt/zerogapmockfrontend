@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:gapzero-df74d.web.app)",
+      "WebFetch(domain:ui-ux-pro-max-skill.nextlevelbuilder.io)",
+      "WebSearch",
+      "mcp__plugin_playwright_playwright__browser_navigate"
+    ]
+  }
+}
